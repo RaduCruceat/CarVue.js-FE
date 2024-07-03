@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CarsView from '../views/Cars/CarsView.vue'
+import EditCarsView from '../views/Cars/EditCarsView.vue'
+import AddCarsView from '../views/Cars/AddCarsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +24,16 @@ const router = createRouter({
           path: '/Cars',
          name: 'Cars',
          component: CarsView
+      },
+      {
+          path: '/EditCars',
+          name: 'EditCars',
+          component: EditCarsView
+      },
+      {
+          path: '/AddCars',
+          name: 'AddCars',
+          component: AddCarsView
       },
   ]
 })

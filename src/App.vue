@@ -19,6 +19,12 @@ import HelloWorld from './components/HelloWorld.vue'
                       <li class="nav-item">
                           <RouterLink class="nav-link active" aria-current="page" to="/Cars">Cars</RouterLink>
                       </li>
+                      <li class="nav-item">
+                          <RouterLink class="nav-link active" aria-current="page" to="/EditCars">Edit Cars</RouterLink>
+                      </li>
+                      <li class="nav-item">
+                          <RouterLink class="nav-link active" aria-current="page" to="/AddCars">Add Cars</RouterLink>
+                      </li>
 
 
                   </ul>
