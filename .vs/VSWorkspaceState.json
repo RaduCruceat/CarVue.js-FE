@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\router",
+    "\\src\\views",
+    "\\src\\views\\Cars"
+  ],
+  "SelectedNode": "\\src\\views\\Cars\\CarsView.vue",
+  "PreviewInSolutionExplorer": false
+}
