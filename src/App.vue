@@ -1,45 +1,46 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
+<!-- App.vue -->
 <template>
-  <header>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-          <div class="container-fluid">
-              <a class="navbar-brand" href="#">Navbar</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                          <RouterLink class="nav-link active" aria-current="page" to="/">Home</RouterLink>
-                      </li>
-                      <li class="nav-item">
-                          <RouterLink class="nav-link active" aria-current="page" to="/Cars">Cars</RouterLink>
-                      </li>
-                      <li class="nav-item">
-                          <RouterLink class="nav-link active" aria-current="page" to="/EditCars">Edit Cars</RouterLink>
-                      </li>
-                      <li class="nav-item">
-                          <RouterLink class="nav-link active" aria-current="page" to="/AddCars">Add Cars</RouterLink>
-                      </li>
-
-
-                  </ul>
-                 
-              </div>
-          </div>
-      </nav>
-
-   
-
-     
- 
-  </header>
-
-  <RouterView />
+    <header>
+        <Menubar :model="items">
+            <template #start>
+                <span class="p-menubar-button">Navbar</span>
+            </template>
+        </Menubar>
+    </header>
+    <RouterView />
 </template>
 
+<script setup>
+    import { ref } from 'vue';
+    import Menubar from 'primevue/menubar';
+    import { useRouter } from 'vue-router';
 
+    const items = ref([
+        {
+            label: 'Home ',
+            command: () => { router.push('/') }
+        },
+        {
+            label: ' Cars ',
+            command: () => { router.push('/Cars') }
+        },
+        {
+            label: ' Edit Cars ',
+            command: () => { router.push('/EditCars') }
+        },
+        {
+            label: ' Add Cars ',
+            command: () => { router.push('/AddCars') }
+        }
+    ]);
+
+    const router = useRouter();
+</script>
+
+<style scoped>
+    .p-menubar-button {
+        font-weight: bold;
+        font-size: 6.25rem;
+        margin-right: 1rem;
+    }
+</style>
