@@ -20,3 +20,23 @@
 
     </main>
 </template>
+
+<script>
+    export default
+        {
+        name: 'Cars',
+        data()
+        {
+            return
+            {
+                Cars:[]
+            }
+            },
+            mounted()
+            {
+                console.log("test");
+            }
+        }
+
+    
+</script>
