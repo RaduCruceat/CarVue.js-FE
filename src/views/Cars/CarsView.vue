@@ -18,7 +18,7 @@
     </main>
     <div style="width:80%; margin: 0 auto;">
         <Button label="Adauga Masina" @click="goToCreateCars" />      
-        <Dropdown v-model="selectedAction"
+        <Select v-model="selectedAction"
                   :options="actions"
                   optionLabel="name"
                   placeholder="Selecteaza o Actiune"
@@ -46,6 +46,7 @@
     import Toast from 'primevue/toast';
     import { useConfirm } from "primevue/useconfirm";
     import Dropdown from 'primevue/dropdown';
+    import Select from 'primevue/select';
 
     export default {
         name: 'Cars',
@@ -53,6 +54,7 @@
             Button,
             Toast,
             Dropdown,
+            Select
         },
        
 
@@ -85,8 +87,12 @@
                 const state = history.state;
                 if (state && state.showMessage && state.toastMessage) {
                     showSuccessToast(state.toastMessage);
-                   
-                    history.replaceState(null, '');
+
+                    // Preserve existing state
+                    const newState = { ...state };
+                    delete newState.showMessage;
+                    delete newState.toastMessage;
+                    history.replaceState(newState, '');
                 }
             });
 

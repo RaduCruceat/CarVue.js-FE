@@ -18,6 +18,7 @@ import ConfirmPopup from 'primevue/confirmpopup';
 import ConfirmationService from 'primevue/confirmationservice';
 import 'primeflex/primeflex.css'
 import Dropdown from 'primevue/dropdown';
+import Select from 'primevue/select';
 
 
 
@@ -39,6 +40,7 @@ app.use(router);
 app.use(ToastService);
 app.use(ConfirmationService);
 
+app.component('Select', Select);
 app.component('ConfirmPopup', ConfirmPopup);
 app.component('Dropdown', Dropdown);
 app.component('Message', Message);
