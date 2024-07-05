@@ -76,17 +76,19 @@
                 } else if (selectedAction.value.value === 'edit') {
                     goToEditCars();
                 }
-                selectedAction.value = null; // Reset selection after action
+                selectedAction.value = null; 
             }
         };
 
             
             onMounted(() => {
-            const state = history.state;
-            if (state && state.showMessage && state.toastMessage) {
-                showSuccessToast(state.toastMessage);
-            }
-             });
+                const state = history.state;
+                if (state && state.showMessage && state.toastMessage) {
+                    showSuccessToast(state.toastMessage);
+                   
+                    history.replaceState(null, '');
+                }
+            });
 
             const goToCreateCars = () => {
                 router.push('/AddCars');            
@@ -114,6 +116,12 @@
 };
 
 const onDeleteReply = () => {
+    toast.add({
+        severity: 'error',
+        summary: 'Succes!',
+        detail:  'Masina a fost stearsa.',
+        life: 3000
+    });
     toast.removeGroup('bc');
     visible.value = false;
 }
