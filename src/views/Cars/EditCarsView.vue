@@ -1,10 +1,7 @@
 <template>
     <main>
         <h1 style="text-align:center">Editeaza masina</h1>
-
         <Button label="Submit" @click="goToCars" />
-
-
     </main>
 </template>
 
@@ -12,7 +9,7 @@
     import Button from 'primevue/button';
 
     export default {
-        name: 'AddCars',
+        name: 'EditCars',
         components: {
             Button,
         },
@@ -20,7 +17,14 @@
             goToCars() {
                 this.$router.push({
                     name: 'Cars',
-                    state: { showMessage: true }
+                    state: {
+                        showMessage: true,
+                        toastMessage: {
+                            severity: 'success',
+                            summary: 'Editare reusita',
+                            detail: 'Masina a fost editata cu succes!'
+                        }
+                    }
                 });
             }
         }

@@ -1,19 +1,23 @@
 <!-- App.vue -->
 <template>
+    <Toast />
     <header>
         <Menubar :model="items">
             <template #start>
+
                 <span class="p-menubar-button"></span>
             </template>
         </Menubar>
     </header>
     <RouterView />
+    <Toast />
 </template>
 
 <script setup>
     import { ref } from 'vue';
     import Menubar from 'primevue/menubar';
     import { useRouter } from 'vue-router';
+    
 
     const items = ref([
         {
@@ -33,6 +37,7 @@
             command: () => { router.push('/AddCars') }
         }
     ]);
+    
 
     const router = useRouter();
 </script>

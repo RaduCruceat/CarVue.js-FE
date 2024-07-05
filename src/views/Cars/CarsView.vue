@@ -19,7 +19,8 @@
         </table>
     </main>
     <div style="width:80%; margin: 0 auto;">
-        <Button label="Adauga Masina" @click="goToCreateCars"  />    
+        <Button label="Adauga Masina" @click="goToCreateCars" />
+       
     </div>
 </template>
 
@@ -28,12 +29,14 @@
     import Button from 'primevue/button';
     import { useToast } from 'primevue/usetoast';
     import { useRouter, useRoute } from 'vue-router';
-    
+    import Toast from 'primevue/toast';
+    import { useConfirm } from "primevue/useconfirm";
 
     export default {
         name: 'Cars',
         components: {
             Button,
+            Toast,
         },
         setup() {
           
@@ -41,23 +44,32 @@
             const toast = useToast();
             const router = useRouter();
             const route = useRoute();
+            const confirm = useConfirm();
             
             onMounted(() => {
-                if (history.state.showMessage) { 
-                    toast.add({
-                        severity: 'warn', summary: 'Warn Message',
-                        detail: 'Message Content', group: 'bl', life: 3000
-                    });
-                }
-            });
+            const state = history.state;
+            if (state && state.showMessage && state.toastMessage) {
+                showToast(state.toastMessage);
+            }
+        });
 
             const goToCreateCars = () => {
                 router.push('/AddCars');            
             };
+            const showToast = (message) => {
+            toast.add({
+                severity: message.severity || 'info',
+                summary: message.summary || 'Message',
+                detail: message.detail || 'Message Content',
+                life: 3000
+            });
+        };
+          
 
             return {
                 cars,
-                goToCreateCars
+                goToCreateCars,
+                 showToast 
             };
         }
     };

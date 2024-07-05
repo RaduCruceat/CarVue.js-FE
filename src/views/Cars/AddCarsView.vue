@@ -2,7 +2,6 @@
     <main>
         <h1 style="text-align:center">Adauga o masina</h1>
         <Button label="Submit" @click="goToCars" />
-      
     </main>
 </template>
 
@@ -18,7 +17,14 @@
             goToCars() {
                 this.$router.push({
                     name: 'Cars',
-                    state: { showMessage: true }
+                    state: {
+                        showMessage: true,
+                        toastMessage: {
+                            severity: 'success',
+                            summary: 'Success',
+                            detail: 'Masina a fost adaugata cu succes!'
+                        }
+                    }
                 });
             }
         }

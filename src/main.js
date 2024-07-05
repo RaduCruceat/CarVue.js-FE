@@ -14,6 +14,10 @@ import 'primeicons/primeicons.css';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
 import Message from 'primevue/message';
+import ConfirmPopup from 'primevue/confirmpopup';
+import ConfirmationService from 'primevue/confirmationservice';
+import 'primeflex/primeflex.css'
+
 
 const app = createApp(App);
 
@@ -31,7 +35,9 @@ app.use(PrimeVue, {
 });
 app.use(router);
 app.use(ToastService);
+app.use(ConfirmationService);
 
+app.component('ConfirmPopup', ConfirmPopup);
 app.component('Message', Message);
 app.component('Toast', Toast);
 app.component('Knob', Knob);
