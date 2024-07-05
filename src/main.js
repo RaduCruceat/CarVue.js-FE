@@ -17,6 +17,8 @@ import Message from 'primevue/message';
 import ConfirmPopup from 'primevue/confirmpopup';
 import ConfirmationService from 'primevue/confirmationservice';
 import 'primeflex/primeflex.css'
+import Dropdown from 'primevue/dropdown';
+
 
 
 const app = createApp(App);
@@ -38,6 +40,7 @@ app.use(ToastService);
 app.use(ConfirmationService);
 
 app.component('ConfirmPopup', ConfirmPopup);
+app.component('Dropdown', Dropdown);
 app.component('Message', Message);
 app.component('Toast', Toast);
 app.component('Knob', Knob);

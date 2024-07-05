@@ -21,8 +21,8 @@
                         showMessage: true,
                         toastMessage: {
                             severity: 'success',
-                            summary: 'Success',
-                            detail: 'Masina a fost adaugata cu succes!'
+                            summary: 'Succes!',
+                            detail: 'Masina a fost adaugata.'
                         }
                     }
                 });

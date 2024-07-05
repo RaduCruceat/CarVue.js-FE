@@ -21,8 +21,8 @@
                         showMessage: true,
                         toastMessage: {
                             severity: 'success',
-                            summary: 'Editare reusita',
-                            detail: 'Masina a fost editata cu succes!'
+                            summary: 'Succes!',
+                            detail: 'Masina a fost editata.'
                         }
                     }
                 });

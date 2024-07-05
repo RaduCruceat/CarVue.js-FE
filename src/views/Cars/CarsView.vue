@@ -13,16 +13,19 @@
                     <th>Actiune</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Add table rows here if needed -->
-            </tbody>
+            <tbody></tbody>
         </table>
     </main>
     <div style="width:80%; margin: 0 auto;">
-        <Button label="Adauga Masina" @click="goToCreateCars" />
-        <Button label="Sterge Masina" severity="danger" @click="showDeleteToast" />
-
+        <Button label="Adauga Masina" @click="goToCreateCars" />      
+        <Dropdown v-model="selectedAction"
+                  :options="actions"
+                  optionLabel="name"
+                  placeholder="Selecteaza o Actiune"
+                  @change="handleActionChange"
+                  style="width: 200px;" />  
     </div>
+
     <div>
         <Toast position="bottom-center" group="bc" @close="onDeleteClose">
             <template #message="slotProps">
@@ -42,21 +45,41 @@
     import { useRouter, useRoute } from 'vue-router';
     import Toast from 'primevue/toast';
     import { useConfirm } from "primevue/useconfirm";
+    import Dropdown from 'primevue/dropdown';
 
     export default {
         name: 'Cars',
         components: {
             Button,
             Toast,
+            Dropdown,
         },
+       
+
         setup() {
-          
+            const selectedAction = ref(null);
             const cars = ref([]);
             const toast = useToast();
             const router = useRouter();
             const route = useRoute();
             const confirm = useConfirm();
             const visible = ref(false);
+              const actions = [
+            { name: 'Sterge Masina', value: 'delete' },
+            { name: 'Editeaza Masina', value: 'edit' }
+        ];
+
+         const handleActionChange = () => {
+            if (selectedAction.value) {
+                if (selectedAction.value.value === 'delete') {
+                    showDeleteToast();
+                } else if (selectedAction.value.value === 'edit') {
+                    goToEditCars();
+                }
+                selectedAction.value = null; // Reset selection after action
+            }
+        };
+
             
             onMounted(() => {
             const state = history.state;
@@ -67,6 +90,10 @@
 
             const goToCreateCars = () => {
                 router.push('/AddCars');            
+            };
+
+            const goToEditCars = () => {
+                router.push('/EditCars');            
             };
 
             const showSuccessToast = (message) => {
@@ -99,10 +126,14 @@ const onDeleteClose = () => {
             return {
                 cars,
                 goToCreateCars,
+                goToEditCars,
                 showDeleteToast,
                 onDeleteReply,
                 onDeleteClose,
-                 showSuccessToast 
+                showSuccessToast,
+                selectedAction,
+                actions,
+                handleActionChange
             };
         }
     };
