@@ -20,7 +20,18 @@
     </main>
     <div style="width:80%; margin: 0 auto;">
         <Button label="Adauga Masina" @click="goToCreateCars" />
-       
+        <Button label="Sterge Masina" severity="danger" @click="showDeleteToast" />
+
+    </div>
+    <div>
+        <Toast position="bottom-center" group="bc" @close="onDeleteClose">
+            <template #message="slotProps">
+                <div class=" items-start flex-auto">
+                    <div class="font-medium text-lg my-4">{{ slotProps.message.summary }}</div>
+                    <Button size="small" label="Da" severity="danger" @click="onDeleteReply()"></Button>
+                </div>
+            </template>
+        </Toast>
     </div>
 </template>
 
@@ -45,18 +56,20 @@
             const router = useRouter();
             const route = useRoute();
             const confirm = useConfirm();
+            const visible = ref(false);
             
             onMounted(() => {
             const state = history.state;
             if (state && state.showMessage && state.toastMessage) {
-                showToast(state.toastMessage);
+                showSuccessToast(state.toastMessage);
             }
-        });
+             });
 
             const goToCreateCars = () => {
                 router.push('/AddCars');            
             };
-            const showToast = (message) => {
+
+            const showSuccessToast = (message) => {
             toast.add({
                 severity: message.severity || 'info',
                 summary: message.summary || 'Message',
@@ -64,12 +77,32 @@
                 life: 3000
             });
         };
+
+
+        const showDeleteToast = () => {
+    if (!visible.value) {
+        toast.add({ severity: 'error', summary: 'Stergeti masina X cu id-ul X?', group: 'bc' });
+        visible.value = true;
+    } 
+};
+
+const onDeleteReply = () => {
+    toast.removeGroup('bc');
+    visible.value = false;
+}
+
+const onDeleteClose = () => {
+    visible.value = false;
+}
           
 
             return {
                 cars,
                 goToCreateCars,
-                 showToast 
+                showDeleteToast,
+                onDeleteReply,
+                onDeleteClose,
+                 showSuccessToast 
             };
         }
     };
