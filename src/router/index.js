@@ -5,7 +5,7 @@ import EditCarsView from '../views/Cars/EditCarsView.vue'
 import AddCarsView from '../views/Cars/AddCarsView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',

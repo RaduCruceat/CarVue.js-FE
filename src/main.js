@@ -10,10 +10,14 @@ import 'primeicons/primeicons.css';
 import Button from 'primevue/button';
 import Checkbox from 'primevue/checkbox';
 import Knob from 'primevue/knob';
+import 'primeicons/primeicons.css';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+import Message from 'primevue/message';
 
 const app = createApp(App);
 
-app.use(router)
+
 app.use(PrimeVue, {
     // Default theme configuration
     theme: {
@@ -21,11 +25,15 @@ app.use(PrimeVue, {
         options: {
             prefix: 'p',
             darkModeSelector: '.my-app-dark',
-            cssLayer: false
+            cssLayer: true
         }
     }
 });
+app.use(router);
+app.use(ToastService);
 
+app.component('Message', Message);
+app.component('Toast', Toast);
 app.component('Knob', Knob);
 app.component('Checkbox', Checkbox);
 app.component('Menubar', Menubar);

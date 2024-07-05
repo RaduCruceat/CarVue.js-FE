@@ -3,7 +3,7 @@
     <header>
         <Menubar :model="items">
             <template #start>
-                <span class="p-menubar-button">Navbar</span>
+                <span class="p-menubar-button"></span>
             </template>
         </Menubar>
     </header>
