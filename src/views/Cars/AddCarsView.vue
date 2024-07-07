@@ -30,13 +30,15 @@
 <script>
 import Button from 'primevue/button';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
     name: 'AddCars',
     components: {
         Button,
     },
-    setup() {
+        setup() {
+        const router = useRouter(); 
         const marca = ref('');
         const model = ref('');
         const an = ref('');
@@ -63,7 +65,7 @@ export default {
         };
 
         const goToCars = () => {
-            this.$router.push({
+            router.push({
                 name: 'Cars',
                 state: {
                     showMessage: true,
@@ -79,7 +81,8 @@ export default {
         return {
             marca, model, an, motor,
             marcaError, modelError, anError, motorError,
-            handleSubmit
+            handleSubmit,
+            goToCars,
         };
     }
 };
