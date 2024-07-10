@@ -16,6 +16,7 @@ export function provideCarStore() {
         cars.value.push(car);
     };
 
+
     const removeCar = (id) => {
         const index = cars.value.findIndex(car => car.id === id);
         if (index !== -1) {

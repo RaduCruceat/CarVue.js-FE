@@ -1,9 +1,7 @@
 ﻿<template>
     <Toast />
     <main>
-      
-            <Button label="Adauga Masina" @click="goToCreateCars" style="margin-left:80%" />
-       
+        <Button label="Adauga Masina" @click="goToCreateCars" style="margin-left:80%" />
         <h1 style="text-align:center">Pagina de masini</h1>
         <table border="1" class="table table-bordered" style="width:80%; margin: 0 auto;">
             <thead>
@@ -18,12 +16,12 @@
             </thead>
             <tbody>
                 <tr v-for="car in cars" :key="car.id">
-                    <td>{{ car.id }}</td>
-                    <td>{{ car.marca }}</td>
-                    <td>{{ car.model }}</td>
-                    <td>{{ car.an }}</td>
-                    <td>{{ car.motor }}</td>
-                    <td>
+                    <td style="text-align:center">{{ car.id }}</td>
+                    <td style="text-align:center">{{ car.marca }}</td>
+                    <td style="text-align:center">{{ car.model }}</td>
+                    <td style="text-align:center">{{ car.an }}</td>
+                    <td style="text-align:center">{{ car.motor }}</td>
+                    <td style="text-align:center">
                         <Select v-model="selectedAction[car.id]"
                                 :options="actions"
                                 optionLabel="name"
@@ -35,8 +33,6 @@
             </tbody>
         </table>
     </main>
-
-
     <div>
         <Toast position="bottom-center" group="bc" @close="onDeleteClose">
             <template #message="slotProps">
@@ -163,4 +159,3 @@
         }
     };
 </script>
-

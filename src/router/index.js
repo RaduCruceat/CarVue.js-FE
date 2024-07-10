@@ -28,9 +28,10 @@ const router = createRouter({
          component: CarsView
       },
       {
-          path: '/EditCars',
+          path: '/EditCars/:id',
           name: 'EditCars',
-          component: EditCarsView
+          component: EditCarsView,
+          props: true
       },
       {
           path: '/AddCars',

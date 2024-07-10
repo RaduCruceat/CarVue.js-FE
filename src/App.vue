@@ -29,15 +29,7 @@
             label: ' Cars ',
             command: () => { router.push('/Cars') }
         },
-        {
-            label: ' Edit Cars ',
-            command: () => { router.push('/EditCars') }
-        },
-        {
-            label: ' Add Cars ',
-            command: () => { router.push('/AddCars') }
-        },
-       
+             
     ]);
     
    
