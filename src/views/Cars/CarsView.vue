@@ -1,6 +1,9 @@
 ﻿<template>
     <Toast />
     <main>
+      
+            <Button label="Adauga Masina" @click="goToCreateCars" style="margin-left:80%" />
+       
         <h1 style="text-align:center">Pagina de masini</h1>
         <table border="1" class="table table-bordered" style="width:80%; margin: 0 auto;">
             <thead>
@@ -32,15 +35,7 @@
             </tbody>
         </table>
     </main>
-    <div style="width:80%; margin: 0 auto;">
-        <Button label="Adauga Masina" @click="goToCreateCars" />      
-        <Select v-model="selectedAction"
-                  :options="actions"
-                  optionLabel="name"
-                  placeholder="Selecteaza o Actiune"
-                  @change="handleActionChange"
-                  style="width: 200px;" />  
-    </div>
+
 
     <div>
         <Toast position="bottom-center" group="bc" @close="onDeleteClose">
@@ -168,3 +163,4 @@
         }
     };
 </script>
+

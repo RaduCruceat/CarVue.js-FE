@@ -9,6 +9,6 @@
     "\\src\\views",
     "\\src\\views\\Cars"
   ],
-  "SelectedNode": "\\src\\router\\index.js",
+  "SelectedNode": "\\src\\views\\Cars\\AddCarsView.vue",
   "PreviewInSolutionExplorer": false
 }
