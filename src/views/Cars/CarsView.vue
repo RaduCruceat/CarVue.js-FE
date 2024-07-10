@@ -21,8 +21,12 @@
                     <td>{{ car.an }}</td>
                     <td>{{ car.motor }}</td>
                     <td>
-                        <Button label="Edit" @click="goToEditCars(car.id)" />
-                        <Button label="Delete" @click="showDeleteToast(car.id)" />
+                        <Select v-model="selectedAction[car.id]"
+                                :options="actions"
+                                optionLabel="name"
+                                placeholder="Selecteaza o Actiune"
+                                @change="handleActionChange(car.id)"
+                                style="width: 200px;" />
                     </td>
                 </tr>
             </tbody>
@@ -59,7 +63,7 @@
     import { useConfirm } from "primevue/useconfirm";
     import Dropdown from 'primevue/dropdown';
     import Select from 'primevue/select';
-    import { useCarStore } from '../../carStore'; 
+    import { useCarStore } from '../../carStore';
 
     export default {
         name: 'Cars',
@@ -72,7 +76,7 @@
 
         setup() {
             const { cars, removeCar } = useCarStore();
-            const selectedAction = ref(null);
+            const selectedAction = ref({});
             const toast = useToast();
             const router = useRouter();
             const route = useRoute();
@@ -83,14 +87,14 @@
                 { name: 'Editeaza Masina', value: 'edit' },
             ];
 
-            const handleActionChange = () => {
-                if (selectedAction.value) {
-                    if (selectedAction.value.value === 'delete') {
-                        showDeleteToast();
-                    } else if (selectedAction.value.value === 'edit') {
-                        goToEditCars();
+            const handleActionChange = (carId) => {
+                if (selectedAction.value[carId]) {
+                    if (selectedAction.value[carId].value === 'delete') {
+                        showDeleteToast(carId);
+                    } else if (selectedAction.value[carId].value === 'edit') {
+                        goToEditCars(carId);
                     }
-                    selectedAction.value = null;
+                    selectedAction.value[carId] = null;
                 }
             };
 
