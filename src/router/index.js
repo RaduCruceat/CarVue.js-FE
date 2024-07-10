@@ -4,6 +4,8 @@ import CarsView from '../views/Cars/CarsView.vue'
 import EditCarsView from '../views/Cars/EditCarsView.vue'
 import AddCarsView from '../views/Cars/AddCarsView.vue'
 
+
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -34,7 +36,7 @@ const router = createRouter({
           path: '/AddCars',
           name: 'AddCars',
           component: AddCarsView
-      },
+      },  
   ]
 })
 

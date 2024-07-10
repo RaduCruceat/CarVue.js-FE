@@ -17,8 +17,9 @@
     import { ref } from 'vue';
     import Menubar from 'primevue/menubar';
     import { useRouter } from 'vue-router';
+    import { provideCarStore } from './carStore';
+ 
     
-
     const items = ref([
         {
             label: 'Home ',
@@ -35,11 +36,13 @@
         {
             label: ' Add Cars ',
             command: () => { router.push('/AddCars') }
-        }
+        },
+       
     ]);
     
-
+   
     const router = useRouter();
+    provideCarStore();
 </script>
 
 <style scoped>

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <Toast />
     <main>
         <h1 style="text-align:center">Pagina de masini</h1>
@@ -13,7 +13,19 @@
                     <th>Actiune</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <tr v-for="car in cars" :key="car.id">
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.marca }}</td>
+                    <td>{{ car.model }}</td>
+                    <td>{{ car.an }}</td>
+                    <td>{{ car.motor }}</td>
+                    <td>
+                        <Button label="Edit" @click="goToEditCars(car.id)" />
+                        <Button label="Delete" @click="showDeleteToast(car.id)" />
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </main>
     <div style="width:80%; margin: 0 auto;">
@@ -47,6 +59,7 @@
     import { useConfirm } from "primevue/useconfirm";
     import Dropdown from 'primevue/dropdown';
     import Select from 'primevue/select';
+    import { useCarStore } from '../../carStore'; 
 
     export default {
         name: 'Cars',
@@ -56,39 +69,36 @@
             Dropdown,
             Select
         },
-       
 
         setup() {
+            const { cars, removeCar } = useCarStore();
             const selectedAction = ref(null);
-            const cars = ref([]);
             const toast = useToast();
             const router = useRouter();
             const route = useRoute();
             const confirm = useConfirm();
             const visible = ref(false);
-              const actions = [
-            { name: 'Sterge Masina', value: 'delete' },
-            { name: 'Editeaza Masina', value: 'edit' }
-        ];
+            const actions = [
+                { name: 'Sterge Masina', value: 'delete' },
+                { name: 'Editeaza Masina', value: 'edit' },
+            ];
 
-         const handleActionChange = () => {
-            if (selectedAction.value) {
-                if (selectedAction.value.value === 'delete') {
-                    showDeleteToast();
-                } else if (selectedAction.value.value === 'edit') {
-                    goToEditCars();
+            const handleActionChange = () => {
+                if (selectedAction.value) {
+                    if (selectedAction.value.value === 'delete') {
+                        showDeleteToast();
+                    } else if (selectedAction.value.value === 'edit') {
+                        goToEditCars();
+                    }
+                    selectedAction.value = null;
                 }
-                selectedAction.value = null; 
-            }
-        };
+            };
 
-            
             onMounted(() => {
                 const state = history.state;
                 if (state && state.showMessage && state.toastMessage) {
                     showSuccessToast(state.toastMessage);
 
-                    // Preserve existing state
                     const newState = { ...state };
                     delete newState.showMessage;
                     delete newState.toastMessage;
@@ -97,45 +107,47 @@
             });
 
             const goToCreateCars = () => {
-                router.push('/AddCars');            
+                router.push('/AddCars');
             };
 
-            const goToEditCars = () => {
-                router.push('/EditCars');            
+            const goToEditCars = (carId) => {
+                router.push(`/EditCars/${carId}`);
             };
 
             const showSuccessToast = (message) => {
-            toast.add({
-                severity: message.severity || 'info',
-                summary: message.summary || 'Message',
-                detail: message.detail || 'Message Content',
-                life: 3000
-            });
-        };
+                toast.add({
+                    severity: message.severity || 'info',
+                    summary: message.summary || 'Message',
+                    detail: message.detail || 'Message Content',
+                    life: 3000
+                });
+            };
 
+            const carIdToDelete = ref(null);
 
-        const showDeleteToast = () => {
-    if (!visible.value) {
-        toast.add({ severity: 'error', summary: 'Stergeti masina X cu id-ul X?', group: 'bc' });
-        visible.value = true;
-    } 
-};
+            const showDeleteToast = (carId) => {
+                if (!visible.value) {
+                    carIdToDelete.value = carId;
+                    toast.add({ severity: 'error', summary: `Stergeti masina cu id-ul ${carId}?`, group: 'bc' });
+                    visible.value = true;
+                }
+            };
 
-const onDeleteReply = () => {
-    toast.add({
-        severity: 'error',
-        summary: 'Succes!',
-        detail:  'Masina a fost stearsa.',
-        life: 3000
-    });
-    toast.removeGroup('bc');
-    visible.value = false;
-}
+            const onDeleteReply = () => {
+                removeCar(carIdToDelete.value);
+                toast.add({
+                    severity: 'success',
+                    summary: 'Succes!',
+                    detail: 'Masina a fost stearsa.',
+                    life: 3000
+                });
+                toast.removeGroup('bc');
+                visible.value = false;
+            };
 
-const onDeleteClose = () => {
-    visible.value = false;
-}
-          
+            const onDeleteClose = () => {
+                visible.value = false;
+            }
 
             return {
                 cars,
@@ -147,7 +159,7 @@ const onDeleteClose = () => {
                 showSuccessToast,
                 selectedAction,
                 actions,
-                handleActionChange
+                handleActionChange,
             };
         }
     };
