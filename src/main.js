@@ -44,14 +44,7 @@ app.use(ConfirmationService);
 
 app.component('Select', Select);
 app.component('ConfirmPopup', ConfirmPopup);
-app.component('Dropdown', Dropdown);
-app.component('Message', Message);
 app.component('Toast', Toast);
-app.component('Knob', Knob);
-app.component('Checkbox', Checkbox);
-app.component('Menubar', Menubar);
-app.component('ToggleSwitch', ToggleSwitch);
 app.component('Button', Button);
-
 
 app.mount('#app');
